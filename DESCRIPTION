@@ -1,0 +1,18 @@
+Package: parseids
+Title: Parsers for Digital Object Identifiers (DOIs) and Other Identifiers
+Description: PEG (Parsing Expression Grammar) parsing for DOIs
+    and other identifiers.
+Version: 0.0.1.9100
+Authors@R: person("Scott", "Chamberlain", role = c("aut", "cre"), email =
+    "myrmecocystus+r@gmail.com")
+License: MIT + file LICENSE
+URL: https://github.com/ropenscilabs/parseids
+BugReports: https://github.com/ropenscilabs/parseids/issues
+LazyData: true
+Roxygen: list(markdown = TRUE)
+Encoding: UTF-8
+Imports: Rcpp, piton
+LinkingTo: Rcpp, piton
+Suggests: testthat
+RoxygenNote: 6.0.1
+SystemRequirements: C++11
