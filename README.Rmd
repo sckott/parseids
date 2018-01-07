@@ -16,7 +16,7 @@ Parsers for Digital Object Identifiers (DOIs) and Other Identifiers
 
 Uses the R pkg [piton](https://github.com/Ironholds/piton) which gives access to the C++ PEG implementation [PEGTL](https://github.com/taocpp/PEGTL).
 
-## Documentation for various identifiers:
+## Documentation for various identifiers
 
 ### DOI
 
