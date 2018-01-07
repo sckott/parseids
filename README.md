@@ -10,6 +10,13 @@ Parsers for Digital Object Identifiers (DOIs) and Other Identifiers
 
 Uses the R pkg [piton](https://github.com/Ironholds/piton) which gives access to the C++ PEG implementation [PEGTL](https://github.com/taocpp/PEGTL).
 
+## Documentation for various identifiers:
+
+### DOI
+
+* <https://en.wikipedia.org/wiki/Digital_object_identifier>
+* <https://www.doi.org/overview/DOI_article_ELIS3.pdf>
+
 ## Example rules
 
 Capture any letter
@@ -60,13 +67,13 @@ library("parseids")
 
 
 ```r
-pid_doi("Foo 10.1094/PHYTO-04-17-0144-R")
+pid_dois("Foo 10.1094/PHYTO-04-17-0144-R")
 #> [1] "10.1094/PHYTO-04-17-0144-R"
 ```
 
 
 ```r
-pid_doi(c("Foo 10.1094/PHYTO-04-17-0144-R", "adsfljadfa dflj fjas fljasf 10.1094/PHYTO-04-17-0144-R"))
+pid_dois(c("Foo 10.1094/PHYTO-04-17-0144-R", "adsfljadfa dflj fjas fljasf 10.1094/PHYTO-04-17-0144-R"))
 #> [1] "10.1094/PHYTO-04-17-0144-R" "10.1094/PHYTO-04-17-0144-R"
 ```
 

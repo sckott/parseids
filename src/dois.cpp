@@ -8,9 +8,6 @@ using namespace tao::TAOCPP_PEGTL_NAMESPACE;
 namespace doi
 {
 
-// Parsing rule that matches a non-empty sequence of
-// alphabetic ascii-characters with greedy-matching.
-
 struct name
   : plus< alpha >
 {};
@@ -22,21 +19,11 @@ struct forwardSlash
     
 // any symbols
 struct txtany
-  // : seq< plus< tao::TAOCPP_PEGTL_NAMESPACE::any > >
   : sor<
     seq< plus< tao::TAOCPP_PEGTL_NAMESPACE::any > >,
     not_one< '\r', '\n', ' ' >
   >
 {};
-
-// any text, digit, or symbol, not spaces
-// struct txtanynotspaces
-//   : sor<
-//     seq< plus< alpha > >,
-//     seq< plus< digit > >,
-//     seq< plus< alpha > >
-//   >
-// {};
 
 struct spacetxt
   : sor< 
@@ -57,10 +44,6 @@ struct txtspace
   >
 {};
 
-// struct doiSome
-//   : seq< doiPrefix, forwardSlash >
-// {};
-
 // rule to match doi prefix
 struct doiAll
   : seq<
@@ -76,17 +59,10 @@ struct grammar
   : star< opt<txtspace>, doiAll, opt<spacetxt> >
 {};
 
-// Class template for user-defined actions that does
-// nothing by default.
-
 template< typename Rule >
 struct action
   : nothing< Rule >
 {};
-
-// Specialisation of the user-defined action to do
-// something when the 'name' rule succeeds; is called
-// with the portion of the input that matched the rule.
 
 template<>
 struct action< doiAll >
