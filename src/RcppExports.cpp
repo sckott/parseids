@@ -5,6 +5,17 @@
 
 using namespace Rcpp;
 
+// doi_prefixes_many
+CharacterVector doi_prefixes_many(CharacterVector x);
+RcppExport SEXP _parseids_doi_prefixes_many(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(doi_prefixes_many(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // doi_parse
 std::string doi_parse(std::string x);
 RcppExport SEXP _parseids_doi_parse(SEXP xSEXP) {
@@ -24,6 +35,28 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
     rcpp_result_gen = Rcpp::wrap(doi_parse_many(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// doi_split_many
+std::string doi_split_many(std::string x);
+RcppExport SEXP _parseids_doi_split_many(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< std::string >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(doi_split_many(x));
+    return rcpp_result_gen;
+END_RCPP
+}
+// doi_suffixes_many
+CharacterVector doi_suffixes_many(CharacterVector x);
+RcppExport SEXP _parseids_doi_suffixes_many(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< CharacterVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(doi_suffixes_many(x));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -51,8 +84,11 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_parseids_doi_prefixes_many", (DL_FUNC) &_parseids_doi_prefixes_many, 1},
     {"_parseids_doi_parse", (DL_FUNC) &_parseids_doi_parse, 1},
     {"_parseids_doi_parse_many", (DL_FUNC) &_parseids_doi_parse_many, 1},
+    {"_parseids_doi_split_many", (DL_FUNC) &_parseids_doi_split_many, 1},
+    {"_parseids_doi_suffixes_many", (DL_FUNC) &_parseids_doi_suffixes_many, 1},
     {"_parseids_replace_all_symbols", (DL_FUNC) &_parseids_replace_all_symbols, 1},
     {"_parseids_replace_specific_symbols", (DL_FUNC) &_parseids_replace_specific_symbols, 1},
     {NULL, NULL, 0}

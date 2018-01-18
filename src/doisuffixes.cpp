@@ -5,7 +5,7 @@ using namespace Rcpp;
 #include <pegtl.hpp>
 using namespace tao::TAOCPP_PEGTL_NAMESPACE;
 
-namespace doisplit
+namespace doisuffixes
 {
 
 struct name
@@ -16,7 +16,7 @@ struct name
 struct forwardSlash
   : one<'/'>
 {};
-
+    
 // any symbols
 struct txtany
   : sor<
@@ -52,9 +52,15 @@ struct doiPrefix
     rep_min_max< 4, 9, digit >
   >{};
 
+// rule to match doi suffix
+struct doiSuffix
+  : seq<
+    txtany
+  >{};
+  
 // Parsing grammar
 struct grammar
-  : star< doiPrefix >
+  : star< doiPrefix, forwardSlash, doiSuffix, opt<spacetxt> >
 {};
 
 template< typename Rule >
@@ -63,7 +69,7 @@ struct action
 {};
 
 template<>
-struct action< doiPrefix >
+struct action< doiSuffix >
 {
   template< typename Input >
   static void apply( const Input& in, std::string& v)
@@ -71,23 +77,17 @@ struct action< doiPrefix >
     v = in.string();
   }
 };
-
-// template<>
-// struct action< doiSuffix >
-// {
-//   template< typename Input >
-//   static void apply( const Input& in, std::string& v)
-//   {
-//     v = in.string();
-//   }
-// };
-
-}  // namespace doisplit
+}  // namespace doisuffixes
 
 //[[Rcpp::export]]
-std::string doi_split_many(std::string x){
-  std::string z;
-  memory_input<> din(x, "moot");
-  parse< doisplit::grammar, doisplit::action >( din, z );
-  return z;
+CharacterVector doi_suffixes_many(CharacterVector x){
+  const int n = x.size();
+  CharacterVector y(n);
+  for (int i=0; i < n; ++i) {
+    std::string z;
+    memory_input<> din(x[i], "moot");
+    parse< doisuffixes::grammar, doisuffixes::action >( din, z );
+    y[i] = z;
+  }
+  return y;
 }

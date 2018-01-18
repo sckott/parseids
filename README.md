@@ -50,6 +50,13 @@ struct grammar
 
 Which is then applied to parsing user input strings
 
+## parseids API
+
+ - pid_dois
+ - pid_dois_prefixes
+ - pid_dois_split
+ - pid_dois_suffixes
+
 ## Install
 
 
@@ -63,7 +70,7 @@ library("parseids")
 ```
 
 
-## Parse DOI
+## pull out DOIs from text strings
 
 
 ```r
@@ -75,6 +82,47 @@ pid_dois("Foo 10.1094/PHYTO-04-17-0144-R")
 ```r
 pid_dois(c("Foo 10.1094/PHYTO-04-17-0144-R", "adsfljadfa dflj fjas fljasf 10.1094/PHYTO-04-17-0144-R"))
 #> [1] "10.1094/PHYTO-04-17-0144-R" "10.1094/PHYTO-04-17-0144-R"
+```
+
+## DOI prefixes
+
+
+```r
+pid_dois_prefixes(c("10.1094/PHYTO-04-17-0144-R", "10.5150/cmcm.2011.086"))
+#> [1] "10.1094" "10.5150"
+```
+
+## DOI suffixes
+
+
+```r
+pid_dois_suffixes(c("10.1094/PHYTO-04-17-0144-R", "10.5150/cmcm.2011.086"))
+#> [1] "PHYTO-04-17-0144-R" "cmcm.2011.086"
+```
+
+## timing
+
+
+```r
+dois_long <- unlist(replicate(100, dois, simplify = FALSE), TRUE)
+length(dois_long)
+#> [1] 100000
+```
+
+
+```r
+library(microbenchmark)
+microbenchmark::microbenchmark(
+  pid_dois = pid_dois(dois_long),
+  prefixes = pid_dois_prefixes(dois_long),
+  suffixes = pid_dois_suffixes(dois_long),
+  times = 100
+)
+#> Unit: milliseconds
+#>      expr       min        lq      mean    median       uq      max neval
+#>  pid_dois 19.010000 19.999469 22.769354 21.036400 25.34600 44.20803   100
+#>  prefixes  6.557008  7.029179  8.514096  7.497874  8.87632 41.34401   100
+#>  suffixes 12.521917 13.109023 15.637671 14.249393 18.34672 22.93747   100
 ```
 
 

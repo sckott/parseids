@@ -34,8 +34,4 @@ pid_dois(c("10.1094/PHYTO-04-17-0144-R", "10.1094/PHYTO"))
 dois
 pid_dois(dois)
 system.time(replicate(10, pid_dois(dois)))
-
-## split DOIs
-# pid_dois_split("10.1094/PHYTO-04-17-0144-R")
-# pid_dois_split(c("10.1094/PHYTO-04-17-0144-R", "10.5150/cmcm.2011.086"))
 }
