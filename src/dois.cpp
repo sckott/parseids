@@ -33,7 +33,7 @@ struct spacetxt
 {};
 
 struct alphaSpace
-  : seq< plus< alpha >, space >
+  : seq< plus< identifier_other >, space >
 {};
 
 struct txtspace
@@ -54,9 +54,22 @@ struct doiAll
     txtany
   >{};
   
+// doi_url rule
+struct doi_url
+  : seq<
+    opt<
+      sor<
+        ::string< 'h', 't', 't', 'p', ':', '/', '/' >,
+        ::string< 'h', 't', 't', 'p', 's', ':', '/', '/' >
+      >
+    >,
+    ::string< 'd', 'o', 'i', '.', 'o', 'r', 'g' >,
+    forwardSlash
+  >{};
+  
 // Parsing grammar
 struct grammar
-  : star< opt<txtspace>, doiAll, opt<spacetxt> >
+  : star< opt<txtspace>, opt<doi_url>, doiAll, opt<spacetxt> >
 {};
 
 template< typename Rule >
@@ -90,6 +103,7 @@ CharacterVector doi_parse_many(CharacterVector x){
   CharacterVector y(n);
   for (int i=0; i < n; ++i) {
     std::string z;
+    x[i] = trimws(x[i], "both");
     memory_input<> din(x[i], "moot");
     parse< doi::grammar, doi::action >( din, z );
     y[i] = z;
