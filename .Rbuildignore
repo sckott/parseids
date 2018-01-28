@@ -5,3 +5,4 @@ README.Rmd
 .travis.yml
 .github
 ^LICENSE\.md$
+^codemeta\.json$
