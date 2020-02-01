@@ -108,7 +108,7 @@ microbenchmark::microbenchmark(
   pid_dois = pid_dois(dois_long),
   prefixes = pid_dois_prefixes(dois_long),
   suffixes = pid_dois_suffixes(dois_long),
-  times = 100
+  times = 10
 )
 ```
 
