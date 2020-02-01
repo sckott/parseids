@@ -38,7 +38,6 @@
 #' # shouldn't work - returns empy string
 #' pid_dois("10.1094")
 #' 
-
 pid_dois <- function(x) {
   doi_parse_many(x)
 }

@@ -1,4 +1,4 @@
-#' Get DOIs prefixes
+#' Get DOI prefixes
 #'
 #' @export
 #' @param x (character) a character vector of strings with DOIs
